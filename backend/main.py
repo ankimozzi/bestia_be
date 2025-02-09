@@ -1,20 +1,15 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
-import os
-from pathlib import Path
+from LinkToken import router as link_token_router
 import pandas as pd
-
-# 프로젝트 루트 디렉토리의 .env 파일 로드
-env_path = Path(__file__).parents[1] / '.env'
-load_dotenv(dotenv_path=env_path)
+from pathlib import Path
 
 app = FastAPI()
 
 # CORS 설정
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],  # Vite 기본 포트 추가
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -38,6 +33,7 @@ async def load_data():
     property_data = pd.read_csv(csv_path)
     print(f"Loaded {len(property_data)} California properties")
 
+# Properties 엔드포인트
 @app.get("/api/properties")
 async def get_properties(
     ne_lat: float = None, 
@@ -62,10 +58,9 @@ async def get_properties(
         "properties": filtered_data.to_dict(orient='records')
     }
 
-@app.get("/admin/{path:path}")
-async def admin_not_found(path: str):
-    raise HTTPException(status_code=403, detail="Admin access not allowed")
+# LinkToken 라우터 포함
+app.include_router(link_token_router, prefix="/api")
 
-@app.get("/favicon.ico")
-async def favicon():
-    raise HTTPException(status_code=404, detail="Favicon not found") 
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
