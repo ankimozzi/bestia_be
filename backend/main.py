@@ -3,8 +3,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from LinkToken import router as link_token_router
 import pandas as pd
 from pathlib import Path
+from fastapi.openapi.utils import get_openapi
 
-app = FastAPI()
+app = FastAPI(
+    title="California Property Mortgage API",
+    description="API for property search and mortgage analysis",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc"
+)
 
 # CORS 설정
 app.add_middleware(
@@ -60,6 +67,20 @@ async def get_properties(
 
 # LinkToken 라우터 포함
 app.include_router(link_token_router, prefix="/api")
+
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    openapi_schema = get_openapi(
+        title="California Property Mortgage API",
+        version="1.0.0",
+        description="API for property search and mortgage analysis",
+        routes=app.routes,
+    )
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+app.openapi = custom_openapi
 
 if __name__ == "__main__":
     import uvicorn

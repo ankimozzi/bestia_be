@@ -5,11 +5,16 @@ from fastapi import FastAPI, HTTPException, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import logging
+from typing import Dict, List
 
 app = FastAPI()
-router = APIRouter()
+router = APIRouter(
+    prefix="/api",
+    tags=["mortgage"],
+    responses={404: {"description": "Not found"}}
+)
 logger = logging.getLogger(__name__)
 
 # CORS 설정
@@ -172,15 +177,37 @@ async def get_historical_rates():
         ]
 
 class MortgageAnalysisRequest(BaseModel):
-    home_value: float
-    loan_amount: float
-    down_payment: float
-    annual_income: float
-    total_debt: float
-    credit_score: int
+    home_value: float = Field(..., description="Property value", example=500000)
+    loan_amount: float = Field(..., description="Requested loan amount", example=400000)
+    down_payment: float = Field(..., description="Down payment amount", example=100000)
+    annual_income: float = Field(..., description="Annual income", example=120000)
+    total_debt: float = Field(..., description="Total current debt", example=15000)
+    credit_score: int = Field(..., description="Credit score", example=720)
 
-@router.post("/mortgage-analysis")
+class MortgageAnalysisResponse(BaseModel):
+    approval_status: str
+    monthly_payment: float
+    DTI_ratio: float
+    LTV_ratio: float
+    approval_details: Dict[str, str]
+
+@router.post("/mortgage-analysis",
+    response_model=MortgageAnalysisResponse,
+    summary="Analyze mortgage application",
+    description="Analyzes a mortgage application and returns approval status and details")
 async def analyze_mortgage(request: MortgageAnalysisRequest):
+    """
+    Analyzes a mortgage application
+    
+    Args:
+        request (MortgageAnalysisRequest): The mortgage application details
+    
+    Returns:
+        MortgageAnalysisResponse: Analysis results including approval status
+    
+    Raises:
+        HTTPException: If the analysis fails
+    """
     try:
         logger.info("Analyzing mortgage application")
         

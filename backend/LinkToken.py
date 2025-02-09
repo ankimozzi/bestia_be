@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+from typing import Dict, Any
 import requests
 import os
 from dotenv import load_dotenv
@@ -12,7 +13,11 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # FastAPI app을 APIRouter로 변경
-router = APIRouter()
+router = APIRouter(
+    prefix="/api",
+    tags=["plaid"],
+    responses={404: {"description": "Not found"}}
+)
 
 # 환경 변수 로드
 env_path = Path(__file__).parents[1] / '.env'
@@ -37,8 +42,39 @@ PLAID_BASE_URL = "https://sandbox.plaid.com"
 class PublicTokenRequest(BaseModel):
     public_token: str
 
-@router.post("/create_link_token")
+    class Config:
+        schema_extra = {
+            "example": {
+                "public_token": "public-sandbox-0000000000"
+            }
+        }
+
+class LinkTokenResponse(BaseModel):
+    link_token: str
+    expiration: str
+    request_id: str
+
+class AccountResponse(BaseModel):
+    access_token: str
+    accounts: list
+    income: float
+    debt: float
+    credit_score: int
+
+@router.post("/create_link_token", 
+    response_model=LinkTokenResponse,
+    summary="Create a Plaid Link token",
+    description="Creates a Link token that is used to initialize Plaid Link")
 async def create_link_token():
+    """
+    Creates a Link token for initializing Plaid Link
+    
+    Returns:
+        LinkTokenResponse: The Link token response from Plaid
+    
+    Raises:
+        HTTPException: If the token creation fails
+    """
     try:
         logger.info("Creating Plaid Link token")
         url = f"{PLAID_BASE_URL}/link/token/create"
@@ -77,8 +113,23 @@ async def create_link_token():
         logger.error(f"Error creating link token: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/exchange_token")
+@router.post("/exchange_token", 
+    response_model=AccountResponse,
+    summary="Exchange public token for access token",
+    description="Exchanges a public token for an access token and returns account data")
 async def exchange_token(request: PublicTokenRequest):
+    """
+    Exchanges a public token for an access token
+    
+    Args:
+        request (PublicTokenRequest): The public token from Plaid Link
+    
+    Returns:
+        AccountResponse: Account data including access token and financial information
+    
+    Raises:
+        HTTPException: If the token exchange fails
+    """
     try:
         logger.info("Exchanging public token for access token")
         url = f"{PLAID_BASE_URL}/item/public_token/exchange"
@@ -113,8 +164,23 @@ async def exchange_token(request: PublicTokenRequest):
         logger.error(f"Token exchange error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/api/accounts/{access_token}")
+@router.get("/accounts/{access_token}",
+    response_model=Dict[str, Any],
+    summary="Get account information",
+    description="Retrieves account information using an access token")
 async def get_accounts(access_token: str):
+    """
+    Retrieves account information from Plaid
+    
+    Args:
+        access_token (str): The access token for the Plaid API
+    
+    Returns:
+        Dict[str, Any]: Account information from Plaid
+    
+    Raises:
+        HTTPException: If the account fetch fails
+    """
     try:
         logger.info("Fetching account information")
         response = requests.post(
