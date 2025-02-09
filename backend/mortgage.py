@@ -1,30 +1,19 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, APIRouter
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import HTTPException, APIRouter
 import requests
 from datetime import datetime
 from pydantic import BaseModel, Field
 import logging
 from typing import Dict, List
 
-app = FastAPI()
+# APIRouter 설정
 router = APIRouter(
-    prefix="/api",
     tags=["mortgage"],
     responses={404: {"description": "Not found"}}
 )
 logger = logging.getLogger(__name__)
-
-# CORS 설정
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # 프로젝트 루트 디렉토리의 .env 파일 로드
 env_path = Path(__file__).parents[1] / '.env'
@@ -90,7 +79,7 @@ def get_current_mortgage_rate() -> float:
         # 테스트용 기본 금리 반환
         return 3.5
 
-@app.get("/api/mortgage-analysis/")
+@router.get("/api/mortgage-analysis/")
 async def mortgage_analysis(
     user_id: str, 
     home_value: int,  # Zillow 대신 직접 전달받은 집값
@@ -140,7 +129,7 @@ async def mortgage_analysis(
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/mortgage-rates/historical/")
+@router.get("/api/mortgage-rates/historical/")
 async def get_historical_rates():
     """FRED API에서 역사적 모기지 금리 데이터 조회"""
     try:
@@ -210,6 +199,7 @@ async def analyze_mortgage(request: MortgageAnalysisRequest):
     """
     try:
         logger.info("Analyzing mortgage application")
+        logger.info(f"Request data: {request}")  # 요청 데이터 로깅 추가
         
         # DTI (Debt-to-Income) 비율 계산
         monthly_income = request.annual_income / 12
@@ -240,13 +230,16 @@ async def analyze_mortgage(request: MortgageAnalysisRequest):
         # 전체 승인 여부 결정
         is_approved = all(detail.startswith("✅") for detail in approval_details.values())
         
-        return {
+        result = {
             "approval_status": "Approved" if is_approved else "Denied",
             "monthly_payment": round(monthly_payment, 2),
             "DTI_ratio": round(dti_ratio, 2),
             "LTV_ratio": round(ltv_ratio, 2),
             "approval_details": approval_details
         }
+        
+        logger.info(f"Analysis result: {result}")  # 결과 로깅 추가
+        return result
         
     except Exception as e:
         logger.error(f"Error analyzing mortgage: {str(e)}")

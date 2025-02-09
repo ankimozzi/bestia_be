@@ -7,6 +7,12 @@ from pathlib import Path
 import logging
 import uuid
 from pydantic import BaseModel
+from plaid.model.item_public_token_exchange_request import ItemPublicTokenExchangeRequest
+from plaid.model.products import Products
+from plaid.model.country_code import CountryCode
+from plaid.model.link_token_create_request import LinkTokenCreateRequest
+from plaid.model.link_token_create_request_user import LinkTokenCreateRequestUser
+from plaid import Client
 
 # 로깅 설정
 logging.basicConfig(level=logging.INFO)
@@ -14,7 +20,6 @@ logger = logging.getLogger(__name__)
 
 # FastAPI app을 APIRouter로 변경
 router = APIRouter(
-    prefix="/api",
     tags=["plaid"],
     responses={404: {"description": "Not found"}}
 )
@@ -39,6 +44,13 @@ PLAID_SECRET = os.getenv("PLAID_SECRET")
 PLAID_ENV = "sandbox"
 PLAID_BASE_URL = "https://sandbox.plaid.com"
 
+# Plaid 클라이언트 초기화
+client = Client(
+    client_id=PLAID_CLIENT_ID,
+    secret=PLAID_SECRET,
+    environment=PLAID_ENV
+)
+
 class PublicTokenRequest(BaseModel):
     public_token: str
 
@@ -61,56 +73,52 @@ class AccountResponse(BaseModel):
     debt: float
     credit_score: int
 
-@router.post("/create_link_token", 
-    response_model=LinkTokenResponse,
-    summary="Create a Plaid Link token",
-    description="Creates a Link token that is used to initialize Plaid Link")
-async def create_link_token():
-    """
-    Creates a Link token for initializing Plaid Link
-    
-    Returns:
-        LinkTokenResponse: The Link token response from Plaid
-    
-    Raises:
-        HTTPException: If the token creation fails
-    """
+@router.post("/api/create_link_token")
+async def create_link_token(request_data: dict):
     try:
-        logger.info("Creating Plaid Link token")
-        url = f"{PLAID_BASE_URL}/link/token/create"
-        
-        payload = {
-            "client_id": PLAID_CLIENT_ID,
-            "secret": PLAID_SECRET,
-            "client_name": "California Property Mortgage",
-            "products": ["auth", "transactions"],
-            "country_codes": ["US"],
-            "language": "en",
-            "user": {
-                "client_user_id": str(uuid.uuid4())
-            }
-        }
-        
-        logger.info(f"Sending request to Plaid: {url}")
-        response = requests.post(
-            url,
-            headers={"Content-Type": "application/json"},
-            json=payload
+        # Link 토큰 생성 요청
+        request = LinkTokenCreateRequest(
+            products=[Products("auth")],
+            client_name="Bestia Mortgage",
+            country_codes=[CountryCode('US')],
+            language='en',
+            user=LinkTokenCreateRequestUser(
+                client_user_id=str(request_data.get('property_id', 'default_user'))
+            )
         )
         
-        logger.info(f"Plaid response status: {response.status_code}")
-        logger.info(f"Plaid response: {response.text}")
+        response = client.link_token_create(request)
+        return {"link_token": response['link_token']}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/api/set_access_token")
+async def set_access_token(request_data: dict):
+    try:
+        public_token = request_data.get('public_token')
+        if not public_token:
+            raise HTTPException(status_code=400, detail="Missing public token")
+
+        # public_token을 access_token으로 교환
+        exchange_request = ItemPublicTokenExchangeRequest(
+            public_token=public_token
+        )
+        exchange_response = client.item_public_token_exchange(exchange_request)
         
-        if response.status_code != 200:
-            raise HTTPException(
-                status_code=response.status_code,
-                detail=f"Plaid API error: {response.text}"
-            )
-            
-        return response.json()
+        access_token = exchange_response['access_token']
+        item_id = exchange_response['item_id']
+
+        # 여기서 access_token을 저장하거나 다른 처리를 할 수 있습니다
+        # 예: 데이터베이스에 저장
+
+        return {
+            "access_token": access_token,
+            "item_id": item_id,
+            "property_id": request_data.get('property_id')
+        }
 
     except Exception as e:
-        logger.error(f"Error creating link token: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/exchange_token", 
