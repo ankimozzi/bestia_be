@@ -1,0 +1,101 @@
+RegionID,RegionName,City,State,Metro,CountyName,price,latitude,longitude
+95992,90011,Los Angeles,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,594352.4106994785,34.1442,-118.1517
+96193,90650,Norwalk,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,748719.6520341778,37.7083,-118.4879
+96361,91331,Los Angeles,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,736294.7497441616,34.1132,-118.1827
+96025,90044,Los Angeles,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,639959.3111795498,34.0772,-118.2187
+96817,92336,Fontana,CA,"Riverside-San Bernardino-Ontario, CA",San Bernardino County,702875.6082342392,36.9483,-119.2479
+97771,94565,Pittsburg,CA,"San Francisco-Oakland-Berkeley, CA",Contra Costa County,579405.51494463,37.4883,-118.70790000000001
+96816,92335,Fontana,CA,"Riverside-San Bernardino-Ontario, CA",San Bernardino County,557508.8895692215,36.9383,-119.2579
+96083,90201,Bell,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,668992.3298756102,37.6083,-118.5879
+96107,90250,Hawthorne,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,867942.294678174,36.8483,-119.34790000000001
+96239,90805,Long Beach,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,697608.5135824512,37.1683,-119.0279
+97223,93307,Bakersfield,CA,"Bakersfield, CA",Kern County,311156.01201079553,35.396300000000004,-118.9957
+96125,90280,South Gate,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,680278.3003912956,37.0283,-119.1679
+96368,91342,Los Angeles,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,805493.4965637453,34.1202,-118.1757
+96990,92683,Westminster,CA,"Los Angeles-Long Beach-Anaheim, CA",Orange County,1048187.0082139404,37.6783,-118.5179
+96882,92503,Riverside,CA,"Riverside-San Bernardino-Ontario, CA",Riverside County,634673.8487645766,37.5983,-118.59790000000001
+96825,92345,Hesperia,CA,"Riverside-San Bernardino-Ontario, CA",San Bernardino County,437629.459693426,37.0283,-119.1679
+96546,91911,Chula Vista,CA,"San Diego-Chula Vista-Carlsbad, CA",San Diego County,769523.2752946982,37.2383,-118.95790000000001
+97104,93033,Oxnard,CA,"Oxnard-Thousand Oaks-Ventura, CA",Ventura County,693493.1510697291,36.8183,-119.3779
+97970,95076,Watsonville,CA,"Santa Cruz-Watsonville, CA",Santa Cruz County,832626.6049365409,37.478300000000004,-118.7179
+96690,92154,San Diego,CA,"San Diego-Chula Vista-Carlsbad, CA",San Diego County,754438.021775966,32.8057,-117.0711
+96846,92376,Rialto,CA,"Riverside-San Bernardino-Ontario, CA",San Bernardino County,556139.9603655015,37.2383,-118.95790000000001
+97023,92804,Anaheim,CA,"Los Angeles-Long Beach-Anaheim, CA",Orange County,905319.2777425636,37.0083,-119.1879
+96468,91710,Chino,CA,"Riverside-San Bernardino-Ontario, CA",San Bernardino County,759663.5314789637,37.4583,-118.7379
+97431,93722,Fresno,CA,"Fresno, CA",Fresno County,396102.44493626896,37.088300000000004,-119.1079
+97567,94112,San Francisco,CA,"San Francisco-Oakland-Berkeley, CA",San Francisco County,1074772.9055892627,37.8419,-122.3524
+98432,95823,Sacramento,CA,"Sacramento-Roseville-Folsom, CA",Sacramento County,429169.525527937,38.6136,-121.4624
+97940,95035,Milpitas,CA,"San Jose-Sunnyvale-Santa Clara, CA",Santa Clara County,1479752.3769222172,37.1783,-119.0179
+96488,91744,La Puente,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,728225.1039360148,37.658300000000004,-118.53790000000001
+96888,92509,Jurupa Valley,CA,"Riverside-San Bernardino-Ontario, CA",Riverside County,626009.8500362132,37.658300000000004,-118.53790000000001
+97189,93257,Porterville,CA,"Visalia, CA",Tulare County,314813.0050233317,37.6683,-118.5279
+97328,93550,Palmdale,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,455663.4722204206,37.0583,-119.1379
+96934,92592,Temecula,CA,"Riverside-San Bernardino-Ontario, CA",Riverside County,764940.8394309185,37.118300000000005,-119.0779
+98325,95630,Folsom,CA,"Sacramento-Roseville-Folsom, CA",Sacramento County,761519.4740794875,37.0283,-119.1679
+97073,92880,Eastvale,CA,"Riverside-San Bernardino-Ontario, CA",Riverside County,950201.0459818612,37.5083,-118.6879
+97751,94544,Hayward,CA,"San Francisco-Oakland-Berkeley, CA",Alameda County,872484.516486165,37.2883,-118.9079
+96208,90706,Bellflower,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,787258.176351817,36.8583,-119.3379
+97318,93535,Lancaster,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,436804.2493098869,36.9583,-119.2379
+97004,92704,Santa Ana,CA,"Los Angeles-Long Beach-Anaheim, CA",Orange County,865821.291121873,36.8183,-119.3779
+97202,93274,Tulare,CA,"Visalia, CA",Tulare County,340644.621694351,36.798300000000005,-119.3979
+96364,91335,Los Angeles,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,803798.0707973465,34.1162,-118.17970000000001
+97740,94533,Fairfield,CA,"Vallejo, CA",Solano County,541921.0379727669,37.1783,-119.0179
+97319,93536,Lancaster,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,539372.9018394074,36.9683,-119.2279
+96467,91709,Chino Hills,CA,"Riverside-San Bernardino-Ontario, CA",San Bernardino County,957484.284868352,37.4483,-118.7479
+96545,91910,Chula Vista,CA,"San Diego-Chula Vista-Carlsbad, CA",San Diego County,835271.0264306134,37.228300000000004,-118.9679
+97721,94513,Brentwood,CA,"San Francisco-Oakland-Berkeley, CA",Contra Costa County,812273.8555721074,36.9883,-119.20790000000001
+97435,93727,Fresno,CA,"Fresno, CA",Fresno County,418352.4686089829,37.1283,-119.06790000000001
+96465,91706,Baldwin Park,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,715838.5281893675,37.4283,-118.7679
+95984,90003,Los Angeles,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,596274.0429079455,34.1362,-118.1597
+96667,92126,San Diego,CA,"San Diego-Chula Vista-Carlsbad, CA",San Diego County,1027432.8901847008,32.7827,-117.09410000000001
+96911,92553,Moreno Valley,CA,"Riverside-San Bernardino-Ontario, CA",Riverside County,515379.08944152,36.8883,-119.3079
+97222,93306,Bakersfield,CA,"Bakersfield, CA",Kern County,343058.5337334428,35.3953,-118.99669999999999
+97167,93230,Hanford,CA,"Hanford-Corcoran, CA",Kings County,363771.43643432873,37.4483,-118.7479
+98411,95747,Roseville,CA,"Sacramento-Roseville-Folsom, CA",Placer County,662198.9426913364,36.8883,-119.3079
+97743,94536,Fremont,CA,"San Francisco-Oakland-Berkeley, CA",Alameda County,1483522.1749091034,37.2083,-118.9879
+96918,92563,Murrieta,CA,"Riverside-San Bernardino-Ontario, CA",Riverside County,693365.9238872844,36.9583,-119.2379
+96110,90255,Huntington Park,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,650202.0795261787,36.8783,-119.31790000000001
+96647,92105,San Diego,CA,"San Diego-Chula Vista-Carlsbad, CA",San Diego County,687322.6316128183,32.762699999999995,-117.11410000000001
+96590,92021,El Cajon,CA,"San Diego-Chula Vista-Carlsbad, CA",San Diego County,778664.4785545379,37.6783,-118.5179
+96477,91730,Rancho Cucamonga,CA,"Riverside-San Bernardino-Ontario, CA",San Bernardino County,673177.3761056903,37.548300000000005,-118.6479
+97565,94110,San Francisco,CA,"San Francisco-Oakland-Berkeley, CA",San Francisco County,1218322.9578432052,37.8399,-122.3544
+97717,94509,Antioch,CA,"San Francisco-Oakland-Berkeley, CA",Contra Costa County,555081.7568461535,36.9483,-119.2479
+97118,93065,Simi Valley,CA,"Oxnard-Thousand Oaks-Ventura, CA",Ventura County,847430.894954815,36.9583,-119.2379
+98378,95687,Vacaville,CA,"Vallejo, CA",Solano County,583739.1809587907,37.5583,-118.6379
+97075,92882,Corona,CA,"Riverside-San Bernardino-Ontario, CA",Riverside County,775857.6593368164,37.5283,-118.6679
+97764,94558,Napa,CA,"Napa, CA",Napa County,908663.7850624496,37.4183,-118.7779
+97745,94538,Fremont,CA,"San Francisco-Oakland-Berkeley, CA",Alameda County,1380504.8169233308,37.228300000000004,-118.9679
+96506,91766,Pomona,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,691129.2675207113,36.838300000000004,-119.3579
+97024,92805,Anaheim,CA,"Los Angeles-Long Beach-Anaheim, CA",Orange County,832424.0569241359,37.0183,-119.17790000000001
+96186,90631,La Habra,CA,"Los Angeles-Long Beach-Anaheim, CA",Orange County,914759.2119985656,37.6383,-118.5579
+96007,90026,Los Angeles,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,1159159.8949342745,34.0592,-118.2367
+97792,94587,Union City,CA,"San Francisco-Oakland-Berkeley, CA",Alameda County,1292997.6263436875,37.6983,-118.4979
+97020,92801,Anaheim,CA,"Los Angeles-Long Beach-Anaheim, CA",Orange County,845013.7399303921,36.978300000000004,-119.2179
+98319,95624,Elk Grove,CA,"Sacramento-Roseville-Folsom, CA",Sacramento County,646599.5335303455,36.9683,-119.2279
+96411,91402,Los Angeles,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,703561.3314062227,34.0632,-118.23270000000001
+97991,95123,San Jose,CA,"San Jose-Sunnyvale-Santa Clara, CA",Santa Clara County,1392776.7331882373,37.4292,-121.79530000000001
+96656,92114,San Diego,CA,"San Diego-Chula Vista-Carlsbad, CA",San Diego County,732132.0959561579,32.771699999999996,-117.10510000000001
+97748,94541,Hayward,CA,"San Francisco-Oakland-Berkeley, CA",Alameda County,807362.1942792296,37.2583,-118.9379
+96113,90262,Lynwood,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,671839.5704422542,36.908300000000004,-119.28790000000001
+96018,90037,Los Angeles,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,659129.7791286219,34.0702,-118.2257
+96868,92407,San Bernardino,CA,"Riverside-San Bernardino-Ontario, CA",San Bernardino County,534071.498054155,37.4583,-118.7379
+97471,93906,Salinas,CA,"Salinas, CA",Monterey County,690901.4563764582,37.4883,-118.70790000000001
+97545,94080,South San Francisco,CA,"San Francisco-Oakland-Berkeley, CA",San Mateo County,1200489.5311809424,37.228300000000004,-118.9679
+97003,92703,Santa Ana,CA,"Los Angeles-Long Beach-Anaheim, CA",Orange County,807526.6190209425,36.8083,-119.3879
+97931,95020,Gilroy,CA,"San Jose-Sunnyvale-Santa Clara, CA",Santa Clara County,1072169.7992031118,37.088300000000004,-119.1079
+96865,92404,San Bernardino,CA,"Riverside-San Bernardino-Ontario, CA",San Bernardino County,472748.2265169635,37.4283,-118.7679
+96003,90022,East Los Angeles,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,663673.2887586872,36.8083,-119.3879
+96501,91761,Ontario,CA,"Riverside-San Bernardino-Ontario, CA",San Bernardino County,699696.5978590982,36.7883,-119.4079
+96572,91977,Spring Valley,CA,"San Diego-Chula Vista-Carlsbad, CA",San Diego County,760445.8281774628,37.4983,-118.6979
+96987,92677,Laguna Niguel,CA,"Los Angeles-Long Beach-Anaheim, CA",Orange County,1415610.5468140887,37.6483,-118.5479
+96962,92630,Lake Forest,CA,"Los Angeles-Long Beach-Anaheim, CA",Orange County,1183132.9308294922,37.3983,-118.7979
+98413,95758,Elk Grove,CA,"Sacramento-Roseville-Folsom, CA",Sacramento County,587173.4043379682,36.908300000000004,-119.28790000000001
+96826,92346,Highland,CA,"Riverside-San Bernardino-Ontario, CA",San Bernardino County,553108.6204820832,37.0383,-119.1579
+96221,90731,Los Angeles,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,813839.3474470678,34.0732,-118.2227
+98040,95206,Stockton,CA,"Stockton, CA",San Joaquin County,431291.7906730228,37.1783,-119.0179
+98304,95608,Carmichael,CA,"Sacramento-Roseville-Folsom, CA",Sacramento County,567064.2221926732,36.8183,-119.3779
+96369,91343,Los Angeles,CA,"Los Angeles-Long Beach-Anaheim, CA",Los Angeles County,876448.6146041659,34.1212,-118.1747
+96728,92201,Indio,CA,"Riverside-San Bernardino-Ontario, CA",Riverside County,472526.8818643172,37.0583,-119.1379
+96917,92562,Murrieta,CA,"Riverside-San Bernardino-Ontario, CA",Riverside County,684279.8339813859,36.9483,-119.2479
+97852,94806,Richmond,CA,"San Francisco-Oakland-Berkeley, CA",Contra Costa County,595858.446363619,37.298300000000005,-118.8979
+96855,92392,Victorville,CA,"Riverside-San Bernardino-Ontario, CA",San Bernardino County,447267.81095625873,37.3283,-118.8679
