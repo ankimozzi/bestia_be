@@ -7,12 +7,14 @@ from pathlib import Path
 import logging
 import uuid
 from pydantic import BaseModel
+from plaid.api import plaid_api
 from plaid.model.item_public_token_exchange_request import ItemPublicTokenExchangeRequest
 from plaid.model.products import Products
 from plaid.model.country_code import CountryCode
 from plaid.model.link_token_create_request import LinkTokenCreateRequest
 from plaid.model.link_token_create_request_user import LinkTokenCreateRequestUser
-from plaid import Client
+from plaid.configuration import Configuration
+from plaid.api_client import ApiClient
 
 # 로깅 설정
 logging.basicConfig(level=logging.INFO)
@@ -45,11 +47,16 @@ PLAID_ENV = "sandbox"
 PLAID_BASE_URL = "https://sandbox.plaid.com"
 
 # Plaid 클라이언트 초기화
-client = Client(
-    client_id=PLAID_CLIENT_ID,
-    secret=PLAID_SECRET,
-    environment=PLAID_ENV
+configuration = Configuration(
+    host=PLAID_BASE_URL,
+    api_key={
+        'clientId': PLAID_CLIENT_ID,
+        'secret': PLAID_SECRET,
+    }
 )
+
+api_client = ApiClient(configuration)
+client = plaid_api.PlaidApi(api_client)
 
 class PublicTokenRequest(BaseModel):
     public_token: str
@@ -73,8 +80,27 @@ class AccountResponse(BaseModel):
     debt: float
     credit_score: int
 
-@router.post("/api/create_link_token")
-async def create_link_token(request_data: dict):
+@router.get("/create_link_token",
+    response_model=LinkTokenResponse,
+    summary="Create Plaid Link token",
+    description="Creates a Link token for Plaid integration",
+    responses={
+        200: {
+            "description": "Successfully created Link token",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "link_token": "link-sandbox-xxx",
+                        "expiration": "2024-02-10T12:00:00Z",
+                        "request_id": "abc123"
+                    }
+                }
+            }
+        },
+        500: {"description": "Plaid API error"}
+    }
+)
+async def create_link_token():
     try:
         # Link 토큰 생성 요청
         request = LinkTokenCreateRequest(
@@ -83,7 +109,7 @@ async def create_link_token(request_data: dict):
             country_codes=[CountryCode('US')],
             language='en',
             user=LinkTokenCreateRequestUser(
-                client_user_id=str(request_data.get('property_id', 'default_user'))
+                client_user_id=str(uuid.uuid4())  # 임시 사용자 ID 생성
             )
         )
         
@@ -93,7 +119,27 @@ async def create_link_token(request_data: dict):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/api/set_access_token")
+@router.post("/api/set_access_token",
+    response_model=Dict[str, str],
+    summary="Exchange public token for access token",
+    description="Exchanges a public token from Plaid Link for an access token",
+    responses={
+        200: {
+            "description": "Successfully exchanged tokens",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "access_token": "access-sandbox-xxx",
+                        "item_id": "item-sandbox-xxx",
+                        "property_id": "prop123"
+                    }
+                }
+            }
+        },
+        400: {"description": "Missing public token"},
+        500: {"description": "Plaid API error"}
+    }
+)
 async def set_access_token(request_data: dict):
     try:
         public_token = request_data.get('public_token')

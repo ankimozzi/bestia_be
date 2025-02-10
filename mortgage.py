@@ -244,3 +244,14 @@ async def analyze_mortgage(request: MortgageAnalysisRequest):
     except Exception as e:
         logger.error(f"Error analyzing mortgage: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/")  # prefix가 /api/mortgage이므로 여기서는 /만 사용
+async def get_mortgage():
+    try:
+        return {
+            "message": "Mortgage API is working",
+            "status": "success"
+        }
+    except Exception as e:
+        logger.error(f"Error in mortgage API: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
