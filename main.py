@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.LinkToken import router as link_token_router
+from routes.mortgage import router as mortgage_router
 
 # from routes.mortgage import router as mortgage_router  # 이 줄을 주석 처리하거나 제거
 from routes.chatbot import router as chatbot_router
@@ -26,3 +27,4 @@ app.include_router(link_token_router, prefix="/api")
 # app.include_router(mortgage_router)  # 이 줄을 주석 처리하거나 제거
 app.include_router(chatbot_router)
 app.include_router(properties_router)
+app.include_router(mortgage_router)
